@@ -116,7 +116,7 @@ function FlowStage({ stage, index, reduceMotion }) {
     <motion.article
       variants={stageVariants}
       transition={{ duration: 0.55, ease: 'easeOut' }}
-      className={`relative z-10 flex gap-5 rounded-[1.75rem] border backdrop-blur lg:flex-col lg:items-center lg:text-center ${
+      className={`relative z-10 flex w-full min-w-0 max-w-full gap-5 rounded-[1.75rem] border backdrop-blur lg:flex-col lg:items-center lg:text-center ${
         stage.featured
           ? 'border-primary/45 bg-[#101e17]/95 p-7 shadow-[0_34px_100px_rgba(109,190,69,0.22)] lg:-mt-14 lg:min-h-[31rem] lg:scale-110 lg:p-8'
           : 'border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.24)] lg:min-h-[18rem] lg:p-6'
@@ -125,11 +125,11 @@ function FlowStage({ stage, index, reduceMotion }) {
       <div className={`flex shrink-0 items-center justify-center rounded-2xl border ${stage.featured ? 'h-16 w-16 border-primary/45 bg-primary/18 text-primary' : 'h-12 w-12 border-white/10 bg-white/8 text-primary'}`}>
         <Icon className={stage.featured ? 'h-8 w-8' : 'h-6 w-6'} strokeWidth={2.1} />
       </div>
-      <div className="min-w-0">
+      <div className="min-w-0 flex-1">
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary/90">{stage.label}</p>
-        <h3 className={`mt-2 font-extrabold tracking-tight text-white ${stage.featured ? 'text-3xl' : 'text-xl'}`}>{stage.title}</h3>
-        {stage.featured && <IndustrialBoilerIllustration className="mt-5 min-w-[18rem] scale-125 sm:min-w-[24rem] lg:-mx-12 lg:min-w-[34rem] lg:scale-100" />}
-        <p className={`mt-3 leading-7 text-white/68 ${stage.featured ? 'text-base' : 'text-sm'}`}>{stage.description}</p>
+        <h3 className={`mt-2 [overflow-wrap:anywhere] font-extrabold tracking-tight text-white ${stage.featured ? 'text-3xl' : 'text-xl'}`}>{stage.title}</h3>
+        {stage.featured && <IndustrialBoilerIllustration className="mt-5 max-w-full overflow-hidden lg:-mx-12 lg:min-w-[34rem] lg:overflow-visible" />}
+        <p className={`mt-3 break-words leading-7 text-white/68 ${stage.featured ? 'text-base' : 'text-sm'}`}>{stage.description}</p>
       </div>
       {index < flowStages.length - 1 && <span aria-hidden="true" className="absolute -bottom-8 left-[31px] h-8 w-px bg-white/15 lg:-right-5 lg:left-auto lg:top-1/2 lg:h-px lg:w-5" />}
     </motion.article>
@@ -146,27 +146,27 @@ export function SustainableEnergyFlow() {
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
       <FloatingParticles reduceMotion={reduceMotion} />
 
-      <Container className="relative z-10">
+      <Container className="relative z-10 max-md:px-5">
         <motion.div
           initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="mx-auto max-w-4xl text-center"
+          className="mx-auto max-w-4xl min-w-0 text-center"
         >
-          <p className="text-sm font-bold uppercase tracking-[0.32em] text-primary">Sustainable Boiler Energy Flow</p>
+          <p className="break-words text-sm font-bold uppercase tracking-[0.22em] text-primary sm:tracking-[0.32em]">Sustainable Boiler Energy Flow</p>
           <h2 className="mt-5 text-4xl font-extrabold tracking-tight text-white md:text-6xl">From Waste Wood to Reliable Factory Steam</h2>
           <p className="mt-6 text-lg leading-8 text-white/72 md:text-xl">Bio Energy Partners manages the complete energy journey — from sustainable biomass fuel handling to professional boiler operation and dependable steam supply.</p>
         </motion.div>
 
-        <div className="relative mt-16 rounded-[2.25rem] border border-white/10 bg-black/18 p-5 shadow-[0_30px_120px_rgba(0,0,0,0.34)] md:p-8 lg:mt-24 lg:p-10">
+        <div className="relative mt-16 w-full max-w-full overflow-hidden rounded-[2.25rem] border border-white/10 bg-black/18 p-5 shadow-[0_30px_120px_rgba(0,0,0,0.34)] md:p-8 lg:mt-24 lg:overflow-visible lg:p-10">
           <EnergyLine reduceMotion={reduceMotion} />
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.16 } } }}
-            className="grid gap-8 lg:grid-cols-[0.9fr_0.9fr_1.8fr_0.9fr_0.9fr] lg:items-center lg:gap-5"
+            className="grid w-full min-w-0 max-w-full grid-cols-1 gap-8 lg:grid-cols-[0.9fr_0.9fr_1.8fr_0.9fr_0.9fr] lg:items-center lg:gap-5"
           >
             {flowStages.map((stage, index) => (
               <FlowStage key={stage.title} stage={stage} index={index} reduceMotion={reduceMotion} />
@@ -181,17 +181,17 @@ export function SustainableEnergyFlow() {
           transition={{ duration: 0.55, ease: 'easeOut' }}
           className="mt-16 md:mt-20"
         >
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-primary">What BEP Manages</p>
+          <div className="mx-auto max-w-3xl min-w-0 text-center">
+            <p className="break-words text-sm font-bold uppercase tracking-[0.22em] text-primary sm:tracking-[0.3em]">What BEP Manages</p>
             <h3 className="mt-4 text-3xl font-extrabold tracking-tight text-white md:text-4xl">Boiler operations handled with industrial discipline.</h3>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {managementCards.map(({ title, Icon }) => (
-              <div key={title} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.055] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur">
+              <div key={title} className="flex min-w-0 items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.055] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-primary/12 text-primary">
                   <Icon className="h-6 w-6" strokeWidth={2.1} />
                 </div>
-                <p className="font-bold text-white">{title}</p>
+                <p className="min-w-0 break-words font-bold text-white">{title}</p>
               </div>
             ))}
           </div>
