@@ -1,4 +1,4 @@
-import { Facebook, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { contactDetails, navigationLinks } from '../data/navigation';
 import { Container } from './Container';
@@ -14,8 +14,8 @@ export function Footer() {
           </div>
           <p className="max-w-md text-sm leading-7 text-white/70">We Manage Your Boiler Using Sustainable Bio Energy.</p>
           <div className="mt-6 flex gap-3">
-            <a href="#" aria-label="LinkedIn" className="rounded-full bg-white/10 p-3 transition hover:bg-primary"><Linkedin size={18} /></a>
-            <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-3 transition hover:bg-primary"><Facebook size={18} /></a>
+            <a href="#" aria-label="LinkedIn" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xs font-bold transition hover:bg-primary">in</a>
+            <a href="#" aria-label="Facebook" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xs font-bold transition hover:bg-primary">f</a>
             <a href={`mailto:${contactDetails.email}`} aria-label="Email" className="rounded-full bg-white/10 p-3 transition hover:bg-primary"><Mail size={18} /></a>
           </div>
         </div>
