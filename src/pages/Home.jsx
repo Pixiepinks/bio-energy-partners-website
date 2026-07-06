@@ -1,5 +1,5 @@
 import { Hero } from '../sections/Hero';
-import { PlaceholderSection } from '../sections/PlaceholderSection';
+import { WhyChooseBep } from '../sections/WhyChooseBep';
 import { IndustriesWeServe } from '../sections/IndustriesWeServe';
 import { FactoryChallenges } from '../sections/FactoryChallenges';
 import { SustainableEnergyFlow } from '../sections/SustainableEnergyFlow';
@@ -16,7 +16,7 @@ export function Home() {
       <SustainableEnergyFlow />
       <CompleteBoilerOperationSolution />
       <IndustriesWeServe />
-      <PlaceholderSection eyebrow="CTA" title="Ready to Strengthen Your Steam Reliability?" description="Placeholder call-to-action section reserved for conversion content." />
+      <WhyChooseBep />
     </>
   );
 }
