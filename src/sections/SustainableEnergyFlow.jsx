@@ -1,50 +1,65 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { Factory, Flame, Leaf, PackageCheck, Trees } from 'lucide-react';
-import { useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Activity, Factory, Flame, Gauge, HardHat, Leaf, PackageCheck, ShieldCheck, Settings, Trees } from 'lucide-react';
 import { Container } from '../components/Container';
 import { PrimaryButton } from '../components/PrimaryButton';
 
-const processSteps = [
+const flowStages = [
   {
-    step: 'Step 1',
+    label: '01',
     title: 'Waste Wood',
-    description: 'Furniture offcuts, sawdust and responsibly sourced waste wood.',
+    description: 'Furniture offcuts, sawdust, and waste biomass.',
     Icon: Trees,
   },
   {
-    step: 'Step 2',
-    title: 'Wood Briquettes & Wood Pellets',
-    description: 'Processed into efficient biomass fuel with consistent quality.',
+    label: '02',
+    title: 'Biomass Fuel',
+    description: 'Wood briquettes and wood pellets prepared for boiler use.',
     Icon: PackageCheck,
   },
   {
-    step: 'Step 3',
-    title: 'Boiler Operation',
-    description: 'Professional boiler operation managed by Bio Energy Partners.',
+    label: '03',
+    title: 'Industrial Boiler',
+    description: 'Professional boiler operation managed for dependable steam output.',
     Icon: Flame,
+    featured: true,
   },
   {
-    step: 'Step 4',
-    title: 'Reliable Steam',
-    description: 'Continuous steam generation supporting uninterrupted production.',
-    Icon: Leaf,
+    label: '04',
+    title: 'Steam Supply',
+    description: 'Reliable steam generation for factory operations.',
+    Icon: Activity,
   },
   {
-    step: 'Step 5',
+    label: '05',
     title: 'Factory Production',
-    description: 'Factories focus on manufacturing while BEP manages the energy.',
+    description: 'Production continues while BEP manages the energy process.',
     Icon: Factory,
   },
 ];
 
-const particlePositions = [
-  'left-[8%] top-[18%]',
-  'left-[18%] top-[72%]',
-  'left-[36%] top-[28%]',
-  'left-[58%] top-[80%]',
-  'left-[76%] top-[20%]',
-  'left-[88%] top-[60%]',
+const managementCards = [
+  { title: 'Boiler Operators', Icon: HardHat },
+  { title: 'Biomass Fuel Supply', Icon: Leaf },
+  { title: 'Steam Reliability', Icon: Gauge },
+  { title: 'Daily Monitoring', Icon: Activity },
+  { title: 'Safety Compliance', Icon: ShieldCheck },
+  { title: 'Maintenance Coordination', Icon: Settings },
 ];
+
+const particlePositions = [
+  'left-[7%] top-[24%]',
+  'left-[18%] top-[78%]',
+  'left-[31%] top-[17%]',
+  'left-[48%] top-[84%]',
+  'left-[64%] top-[20%]',
+  'left-[77%] top-[72%]',
+  'left-[91%] top-[31%]',
+];
+
+const stageVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 },
+};
 
 function FloatingParticles({ reduceMotion }) {
   return (
@@ -52,69 +67,104 @@ function FloatingParticles({ reduceMotion }) {
       {particlePositions.map((position, index) => (
         <motion.span
           key={position}
-          className={`absolute h-1.5 w-1.5 rounded-full bg-primary/50 shadow-[0_0_18px_rgba(109,190,69,0.9)] ${position}`}
+          className={`absolute h-1.5 w-1.5 rounded-full bg-primary/60 shadow-[0_0_20px_rgba(109,190,69,0.9)] ${position}`}
           animate={
             reduceMotion
               ? undefined
               : {
-                  y: [0, -18, 0],
-                  opacity: [0.25, 0.85, 0.25],
-                  scale: [1, 1.45, 1],
+                  y: [0, -16, 0],
+                  x: [0, index % 2 === 0 ? 8 : -8, 0],
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.55, 1],
                 }
           }
-          transition={{ duration: 4 + index * 0.35, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }}
+          transition={{ duration: 4.5 + index * 0.28, repeat: Infinity, ease: 'easeInOut', delay: index * 0.35 }}
         />
       ))}
     </div>
   );
 }
 
-function ProcessNode({ step, title, description, Icon, index, reduceMotion }) {
-  const isLeftAligned = index % 2 === 0;
-  const alignment = isLeftAligned ? 'md:pr-20 md:text-right' : 'md:col-start-2 md:pl-20';
-  const dotAlignment = isLeftAligned
-    ? 'md:right-[-10px] md:translate-x-1/2'
-    : 'md:left-[-10px] md:-translate-x-1/2';
+function BoilerIllustration({ reduceMotion }) {
+  return (
+    <div aria-hidden="true" className="relative mx-auto h-36 w-full max-w-[15rem] sm:h-40">
+      <div className="absolute left-1/2 top-0 flex -translate-x-1/2 gap-3">
+        {[0, 1, 2].map((item) => (
+          <motion.span
+            key={item}
+            className="h-12 w-3 rounded-full bg-gradient-to-t from-white/0 via-white/35 to-white/0 blur-[1px]"
+            animate={reduceMotion ? undefined : { y: [16, -10, 16], opacity: [0, 0.55, 0], scaleY: [0.7, 1.15, 0.7] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: item * 0.35 }}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-x-5 bottom-6 h-24 rounded-[2rem] border border-primary/35 bg-gradient-to-br from-[#26352f] via-[#111d18] to-[#07110d] shadow-[inset_0_0_32px_rgba(255,255,255,0.08),0_0_70px_rgba(109,190,69,0.28)]" />
+      <div className="absolute bottom-9 left-1/2 h-14 w-14 -translate-x-1/2 rounded-full border-4 border-[#6dbe45]/50 bg-[#07110d] shadow-[inset_0_0_20px_rgba(109,190,69,0.25),0_0_30px_rgba(109,190,69,0.35)]" />
+      <div className="absolute bottom-12 left-8 h-9 w-6 rounded bg-[#1d2c25] shadow-[12rem_0_0_#1d2c25]" />
+      <div className="absolute bottom-3 left-8 right-8 h-4 rounded-full bg-[#0a1711]" />
+      <div className="absolute bottom-24 right-9 h-9 w-8 rounded-t-lg border border-primary/20 bg-[#1b2a23]" />
+    </div>
+  );
+}
+
+function EnergyLine({ reduceMotion }) {
+  const animate = reduceMotion ? undefined : { x: ['-8%', '108%'] };
+
+  return (
+    <>
+      <div aria-hidden="true" className="absolute left-[8%] right-[8%] top-1/2 hidden h-px bg-white/15 lg:block" />
+      <motion.div
+        aria-hidden="true"
+        className="absolute left-[8%] top-1/2 hidden h-[3px] w-[18%] rounded-full bg-gradient-to-r from-transparent via-[#b6ff81] to-transparent shadow-[0_0_24px_rgba(109,190,69,0.9)] lg:block"
+        animate={animate}
+        transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+      />
+      <div aria-hidden="true" className="absolute bottom-16 left-8 top-16 w-px bg-white/15 lg:hidden" />
+      <motion.div
+        aria-hidden="true"
+        className="absolute left-[31px] top-16 h-24 w-[3px] rounded-full bg-gradient-to-b from-transparent via-[#b6ff81] to-transparent shadow-[0_0_24px_rgba(109,190,69,0.9)] lg:hidden"
+        animate={reduceMotion ? undefined : { y: ['0%', '520%'] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+      />
+    </>
+  );
+}
+
+function FlowStage({ stage, index, reduceMotion }) {
+  const Icon = stage.Icon;
 
   return (
     <motion.article
-      variants={{
-        hidden: { opacity: 0, y: reduceMotion ? 0 : 28, scale: reduceMotion ? 1 : 0.98 },
-        visible: { opacity: 1, y: 0, scale: 1 },
-      }}
+      variants={stageVariants}
       transition={{ duration: 0.55, ease: 'easeOut' }}
-      className={`relative min-w-[82vw] rounded-[2rem] border border-white/10 bg-white/[0.06] p-6 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur md:min-w-0 md:p-8 ${alignment}`}
+      className={`relative z-10 flex gap-5 rounded-[1.75rem] border backdrop-blur lg:flex-col lg:items-center lg:text-center ${
+        stage.featured
+          ? 'border-primary/45 bg-[#101e17]/95 p-7 shadow-[0_34px_100px_rgba(109,190,69,0.22)] lg:-mt-10 lg:min-h-[27rem] lg:scale-110 lg:p-8'
+          : 'border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.24)] lg:min-h-[18rem] lg:p-6'
+      }`}
     >
-      <motion.div
-        className={`absolute -left-2 top-8 hidden h-5 w-5 rounded-full border border-primary/50 bg-[#07150f] shadow-[0_0_0_8px_rgba(109,190,69,0.08),0_0_34px_rgba(109,190,69,0.65)] md:block ${dotAlignment}`}
-        animate={reduceMotion ? undefined : { boxShadow: ['0 0 0 8px rgba(109,190,69,0.08), 0 0 22px rgba(109,190,69,0.45)', '0 0 0 14px rgba(109,190,69,0.16), 0 0 42px rgba(109,190,69,0.75)', '0 0 0 8px rgba(109,190,69,0.08), 0 0 22px rgba(109,190,69,0.45)'] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: index * 0.18 }}
-      />
-      <div className={`flex items-start gap-5 ${isLeftAligned ? 'md:flex-row-reverse' : ''}`}>
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-primary/30 bg-primary/15 text-primary shadow-[0_0_34px_rgba(109,190,69,0.25)]">
-          <Icon aria-hidden="true" className="h-7 w-7" strokeWidth={2.1} />
-        </div>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary/90">{step}</p>
-          <h3 className="mt-3 text-2xl font-bold tracking-tight text-white">{title}</h3>
-          <p className="mt-4 text-sm leading-7 text-white/68 md:text-base">{description}</p>
-        </div>
+      <div className={`flex shrink-0 items-center justify-center rounded-2xl border ${stage.featured ? 'h-16 w-16 border-primary/45 bg-primary/18 text-primary' : 'h-12 w-12 border-white/10 bg-white/8 text-primary'}`}>
+        <Icon className={stage.featured ? 'h-8 w-8' : 'h-6 w-6'} strokeWidth={2.1} />
       </div>
+      <div className="min-w-0">
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary/90">{stage.label}</p>
+        <h3 className={`mt-2 font-extrabold tracking-tight text-white ${stage.featured ? 'text-3xl' : 'text-xl'}`}>{stage.title}</h3>
+        {stage.featured && <BoilerIllustration reduceMotion={reduceMotion} />}
+        <p className={`mt-3 leading-7 text-white/68 ${stage.featured ? 'text-base' : 'text-sm'}`}>{stage.description}</p>
+      </div>
+      {index < flowStages.length - 1 && <span aria-hidden="true" className="absolute -bottom-8 left-[31px] h-8 w-px bg-white/15 lg:-right-5 lg:left-auto lg:top-1/2 lg:h-px lg:w-5" />}
     </motion.article>
   );
 }
 
 export function SustainableEnergyFlow() {
   const reduceMotion = useReducedMotion();
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start 70%', 'end 55%'] });
-  const desktopLineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const mobileLineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[#06110d] py-24 text-white md:py-32">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(109,190,69,0.22),transparent_34%),radial-gradient(circle_at_82%_26%,rgba(63,131,248,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_35%)]" />
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+    <section className="relative overflow-hidden bg-[#07100d] py-24 text-white md:py-32">
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(109,190,69,0.23),transparent_30%),radial-gradient(circle_at_52%_45%,rgba(109,190,69,0.16),transparent_24%),radial-gradient(circle_at_86%_30%,rgba(63,131,248,0.12),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_34%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:56px_56px] opacity-30" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
       <FloatingParticles reduceMotion={reduceMotion} />
 
       <Container className="relative z-10">
@@ -123,33 +173,24 @@ export function SustainableEnergyFlow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="mx-auto max-w-3xl text-center"
+          className="mx-auto max-w-4xl text-center"
         >
-          <p className="text-sm font-bold uppercase tracking-[0.32em] text-primary">Our Sustainable Energy Flow</p>
-          <h2 className="mt-5 text-4xl font-extrabold tracking-tight text-white md:text-6xl">From Waste Wood to Reliable Industrial Steam</h2>
-          <p className="mt-6 text-lg leading-8 text-white/72 md:text-xl">Bio Energy Partners transforms waste biomass into dependable industrial energy through sustainable fuel management and professional boiler operation.</p>
+          <p className="text-sm font-bold uppercase tracking-[0.32em] text-primary">Sustainable Boiler Energy Flow</p>
+          <h2 className="mt-5 text-4xl font-extrabold tracking-tight text-white md:text-6xl">From Waste Wood to Reliable Factory Steam</h2>
+          <p className="mt-6 text-lg leading-8 text-white/72 md:text-xl">Bio Energy Partners manages the complete energy journey — from sustainable biomass fuel handling to professional boiler operation and dependable steam supply.</p>
         </motion.div>
 
-        <div className="relative mt-16 md:mt-24">
-          <div aria-hidden="true" className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block">
-            <motion.div className="h-full origin-top bg-gradient-to-b from-primary via-[#a7f36f] to-primary shadow-[0_0_28px_rgba(109,190,69,0.75)]" style={{ scaleY: reduceMotion ? 1 : desktopLineScale }} />
-          </div>
-
-          <div className="md:hidden">
-            <div aria-hidden="true" className="absolute left-0 top-1/2 h-px w-full bg-white/10">
-              <motion.div className="h-full origin-left bg-gradient-to-r from-primary via-[#a7f36f] to-primary shadow-[0_0_28px_rgba(109,190,69,0.75)]" style={{ scaleX: reduceMotion ? 1 : mobileLineScale }} />
-            </div>
-          </div>
-
+        <div className="relative mt-16 rounded-[2.25rem] border border-white/10 bg-black/18 p-5 shadow-[0_30px_120px_rgba(0,0,0,0.34)] md:p-8 lg:mt-24 lg:p-10">
+          <EnergyLine reduceMotion={reduceMotion} />
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.18 } } }}
-            className="flex gap-5 overflow-x-auto pb-8 [scrollbar-width:none] md:grid md:grid-cols-2 md:gap-x-0 md:gap-y-10 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.16 } } }}
+            className="grid gap-8 lg:grid-cols-[0.95fr_0.95fr_1.35fr_0.95fr_0.95fr] lg:items-center lg:gap-5"
           >
-            {processSteps.map((item, index) => (
-              <ProcessNode key={item.step} index={index} reduceMotion={reduceMotion} {...item} />
+            {flowStages.map((stage, index) => (
+              <FlowStage key={stage.title} stage={stage} index={index} reduceMotion={reduceMotion} />
             ))}
           </motion.div>
         </div>
@@ -157,12 +198,35 @@ export function SustainableEnergyFlow() {
         <motion.div
           initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+          className="mt-16 md:mt-20"
+        >
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.3em] text-primary">What BEP Manages</p>
+            <h3 className="mt-4 text-3xl font-extrabold tracking-tight text-white md:text-4xl">Boiler operations handled with industrial discipline.</h3>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {managementCards.map(({ title, Icon }) => (
+              <div key={title} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.055] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-primary/12 text-primary">
+                  <Icon className="h-6 w-6" strokeWidth={2.1} />
+                </div>
+                <p className="font-bold text-white">{title}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.15 }}
+          transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.1 }}
           className="mx-auto mt-16 flex max-w-4xl flex-col items-center text-center"
         >
-          <p className="text-3xl font-extrabold tracking-tight text-white md:text-5xl">Cleaner Energy.<br className="hidden md:block" /> Reliable Steam.<br className="hidden md:block" /> Continuous Production.</p>
-          <PrimaryButton to="/contact" className="mt-9 shadow-[0_18px_55px_rgba(109,190,69,0.28)]">Discuss Your Boiler Operation</PrimaryButton>
+          <p className="text-3xl font-extrabold tracking-tight text-white md:text-5xl">Cleaner Energy. Reliable Steam. Continuous Production.</p>
+          <PrimaryButton to="/contact" className="mt-9 shadow-[0_18px_55px_rgba(109,190,69,0.28)]">Discuss Boiler Operation</PrimaryButton>
         </motion.div>
       </Container>
     </section>
