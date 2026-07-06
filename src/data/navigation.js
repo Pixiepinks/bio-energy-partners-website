@@ -7,7 +7,12 @@ export const navigationLinks = [
 ];
 
 export const contactDetails = {
-  address: 'Corporate office address placeholder',
-  phone: '+94 XX XXX XXXX',
-  email: 'info@bioenergypartners.com',
+  officeLabel: 'Corporate Office',
+  address: ['#17-3, Echelon Square,', 'Colombo,', 'Sri Lanka.'],
+  phoneLabel: 'Telephone',
+  phones: ['+94 112 754914', '+94 707 754914'],
+  emailLabel: 'Email',
+  email: 'info@bio-energy-partners.com',
+  websiteLabel: 'Website',
+  website: 'www.bio-energy-partners.com',
 };
