@@ -199,9 +199,37 @@ function HeroIllustration({ shouldReduceMotion }) {
           </g>
 
           <g>
-            <circle cx="320" cy="276" r="32" fill="#091210" stroke="#DFF5D8" strokeOpacity="0.8" strokeWidth="5" />
-            <path d="M303 282a18 18 0 0 1 35-6" fill="none" stroke="#6DBE45" strokeWidth="5" strokeLinecap="round" />
-            <motion.path d="M320 276l16-12" stroke="#F4FFF0" strokeWidth="4" strokeLinecap="round" animate={shouldReduceMotion ? undefined : { rotate: [-10, 18, -10] }} style={{ originX: '320px', originY: '276px' }} transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }} />
+            <g transform="translate(363 276)">
+              <circle r="33" fill="#091210" stroke="#DFF5D8" strokeOpacity="0.82" strokeWidth="5" />
+              <circle r="24" fill="none" stroke="#DFF5D8" strokeOpacity="0.1" strokeWidth="2" />
+              <path d="M-18 11a21 21 0 0 1 36 0" fill="none" stroke="#6DBE45" strokeWidth="4.5" strokeLinecap="round" />
+              {[-120, -90, -60, -30, 0, 30, 60, 90, 120].map((angle) => (
+                <line
+                  key={angle}
+                  x1="0"
+                  y1="-27"
+                  x2="0"
+                  y2={angle % 60 === 0 ? '-20' : '-22'}
+                  stroke="#F4FFF0"
+                  strokeOpacity={angle % 60 === 0 ? 0.72 : 0.45}
+                  strokeWidth={angle % 60 === 0 ? 2.2 : 1.5}
+                  strokeLinecap="round"
+                  transform={`rotate(${angle})`}
+                />
+              ))}
+              <motion.line
+                x1="0"
+                y1="0"
+                x2="15"
+                y2="-14"
+                stroke="#F4FFF0"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                animate={shouldReduceMotion ? undefined : { rotate: [-8, 14, -8] }}
+                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <circle r="4.4" fill="#F4FFF0" stroke="#6DBE45" strokeOpacity="0.65" strokeWidth="1.6" />
+            </g>
             <rect x="446" y="258" width="66" height="88" rx="14" fill="#0A1312" stroke="#DDF4D6" strokeOpacity="0.18" strokeWidth="3" />
             <rect x="457" y="270" width="44" height="22" rx="6" fill="#6DBE45" fillOpacity="0.78" />
             <circle cx="464" cy="313" r="6" fill="#6DBE45" /><circle cx="482" cy="313" r="6" fill="#DDF4D6" opacity="0.72" /><circle cx="500" cy="313" r="6" fill="#6DBE45" opacity="0.55" />
