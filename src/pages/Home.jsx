@@ -1,5 +1,6 @@
 import { Hero } from '../sections/Hero';
 import { PlaceholderSection } from '../sections/PlaceholderSection';
+import { IndustriesWeServe } from '../sections/IndustriesWeServe';
 import { FactoryChallenges } from '../sections/FactoryChallenges';
 import { SustainableEnergyFlow } from '../sections/SustainableEnergyFlow';
 import { CompleteBoilerOperationSolution } from '../sections/CompleteBoilerOperationSolution';
@@ -14,7 +15,7 @@ export function Home() {
       <FactoryChallenges />
       <SustainableEnergyFlow />
       <CompleteBoilerOperationSolution />
-      <PlaceholderSection eyebrow="Sustainability" title="Sustainable Bio Energy Management" description="Placeholder section reserved for biomass, emissions, and circular energy impact messaging." tone="gray" />
+      <IndustriesWeServe />
       <PlaceholderSection eyebrow="CTA" title="Ready to Strengthen Your Steam Reliability?" description="Placeholder call-to-action section reserved for conversion content." />
     </>
   );
