@@ -13,7 +13,7 @@ const responsibilities = [
   { title: 'Maintenance Coordination', description: 'Preventive maintenance planning and breakdown support.', Icon: Settings },
 ];
 
-const trustItems = ['Experienced Team', 'Sustainable Bio Energy', 'Reliable Steam', 'Focus on Your Production'];
+const trustItems = ['Reduced Operational Burden', 'Reliable Steam Supply', 'Sustainable Biomass Energy', 'Improved Production Continuity'];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 22 },
