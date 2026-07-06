@@ -1,9 +1,8 @@
 export const navigationLinks = [
   { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Boiler Operation Solution', path: '/boiler-operation-solution' },
+  { label: 'Solutions', path: '/boiler-operation-solution' },
   { label: 'Industries', path: '/industries' },
-  { label: 'Sustainability', path: '/sustainability' },
+  { label: 'About BEP', path: '/about' },
   { label: 'Contact', path: '/contact' },
 ];
 
