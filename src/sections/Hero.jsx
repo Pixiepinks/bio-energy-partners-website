@@ -72,7 +72,7 @@ export function Hero() {
 function HeroIllustration({ shouldReduceMotion }) {
   const steamMotion = shouldReduceMotion
     ? undefined
-    : { opacity: [0, 0.75, 0], y: [0, -32, -70], scale: [0.8, 1.08, 1.3] };
+    : { opacity: [0, 0.9, 0], y: [0, -38, -78], scale: [0.86, 1.14, 1.38] };
   const flowMotion = shouldReduceMotion
     ? undefined
     : { pathLength: [0.05, 0.95, 0.05], opacity: [0.25, 1, 0.25] };
@@ -111,8 +111,38 @@ function HeroIllustration({ shouldReduceMotion }) {
               <stop stopColor="#6DBE45" stopOpacity="0.24" />
               <stop offset="1" stopColor="#6DBE45" stopOpacity="0" />
             </radialGradient>
+            <radialGradient id="combustionGlow" cx="50%" cy="50%" r="58%">
+              <stop stopColor="#FF9A1F" />
+              <stop offset="0.48" stopColor="#E45B21" stopOpacity="0.9" />
+              <stop offset="1" stopColor="#B83A1B" stopOpacity="0.25" />
+            </radialGradient>
+            <radialGradient id="warmSteelLight" cx="0" cy="0" r="1" gradientTransform="matrix(115 0 0 92 206 313)" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FF9A1F" stopOpacity="0.38" />
+              <stop offset="1" stopColor="#FF9A1F" stopOpacity="0" />
+            </radialGradient>
+            <linearGradient id="briquetteHeat" x1="54" x2="212" y1="384" y2="346" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#704522" />
+              <stop offset="0.64" stopColor="#9A6231" />
+              <stop offset="1" stopColor="#D9822B" />
+            </linearGradient>
+            <radialGradient id="flameCore" cx="50%" cy="44%" r="62%">
+              <stop stopColor="#FFF2A3" />
+              <stop offset="0.52" stopColor="#FF9A1F" />
+              <stop offset="1" stopColor="#B83A1B" />
+            </radialGradient>
+            <linearGradient id="steamFade" x1="0" x2="0" y1="112" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FFFFFF" stopOpacity="0.76" />
+              <stop offset="1" stopColor="#CBD5D1" stopOpacity="0.12" />
+            </linearGradient>
+            <clipPath id="burnerClip">
+              <ellipse cx="202" cy="312" rx="34" ry="70" />
+            </clipPath>
             <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="7" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+            <filter id="emberGlow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="blur" />
               <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
           </defs>
@@ -130,19 +160,15 @@ function HeroIllustration({ shouldReduceMotion }) {
           <g>
             <path d="M44 375l170-38 20 42-168 42-22-46Z" fill="#151f1d" stroke="#DDF4D6" strokeOpacity="0.18" strokeWidth="3" />
             <path d="M70 375l132-29" stroke="#6DBE45" strokeOpacity="0.42" strokeWidth="6" strokeLinecap="round" />
-            {Array.from({ length: 8 }).map((_, index) => (
-              <motion.rect
-                key={index}
-                x={74 + index * 18}
-                y={365 - index * 4}
-                width="24"
-                height="12"
-                rx="4"
-                fill="#B48245"
-                animate={shouldReduceMotion ? undefined : { x: [74 + index * 18, 88 + index * 18, 74 + index * 18] }}
-                transition={{ duration: 3.4, repeat: Infinity, ease: 'linear', delay: index * 0.08 }}
-              />
-            ))}
+            <motion.g animate={shouldReduceMotion ? undefined : { x: [0, 20, 0] }} transition={{ duration: 8.5, repeat: Infinity, ease: 'linear' }}>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <g key={index} transform={`translate(${68 + index * 18} ${374 - index * 4}) rotate(-13)`}>
+                  <rect width="26" height="12" rx="6" fill="url(#briquetteHeat)" stroke="#D39A57" strokeOpacity={index > 5 ? 0.42 : 0.18} />
+                  <ellipse cx="3" cy="6" rx="3" ry="5.4" fill="#5F371C" opacity="0.82" />
+                  <path d="M8 4.2h12M9 7.8h9" stroke={index > 5 ? '#FFB04A' : '#3B2415'} strokeOpacity={index > 5 ? 0.65 : 0.26} strokeWidth="1.3" strokeLinecap="round" />
+                </g>
+              ))}
+            </motion.g>
           </g>
 
           <g filter="url(#softGlow)">
@@ -154,6 +180,13 @@ function HeroIllustration({ shouldReduceMotion }) {
             <rect x="198" y="218" width="330" height="188" rx="88" fill="url(#boilerShell)" stroke="#ECF8E8" strokeOpacity="0.18" strokeWidth="4" />
             <ellipse cx="523" cy="312" rx="52" ry="90" fill="#182622" stroke="#ECF8E8" strokeOpacity="0.22" strokeWidth="4" />
             <ellipse cx="202" cy="312" rx="38" ry="76" fill="#0D1715" stroke="#6DBE45" strokeOpacity="0.36" strokeWidth="4" />
+            <ellipse cx="206" cy="314" rx="112" ry="84" fill="url(#warmSteelLight)" opacity="0.55" />
+            <path d="M213 347c-18 13-44 8-52-13 13 6 28-1 30-17 4-24 20-37 35-47-2 18 16 29 18 50 1 12-7 21-31 27Z" fill="#FF9A1F" opacity="0.14" />
+            <g clipPath="url(#burnerClip)">
+              <motion.ellipse cx="202" cy="320" rx="34" ry="67" fill="url(#combustionGlow)" animate={shouldReduceMotion ? undefined : { opacity: [0.72, 1, 0.78], scale: [0.97, 1.04, 0.98] }} transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }} />
+              <motion.path d="M202 354C184 338 188 314 202 297c2 16 18 23 19 40 0 10-7 17-19 17Z" fill="url(#flameCore)" animate={shouldReduceMotion ? undefined : { scaleY: [0.92, 1.08, 0.96], x: [0, 1.5, -1, 0] }} style={{ originX: '202px', originY: '354px' }} transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }} />
+              <motion.path d="M200 348c-8-9-5-23 5-33 1 9 10 14 9 24-1 6-6 9-14 9Z" fill="#FFF2A3" opacity="0.9" animate={shouldReduceMotion ? undefined : { opacity: [0.72, 1, 0.76] }} transition={{ duration: 1.9, repeat: Infinity, ease: 'easeInOut' }} />
+            </g>
             <path d="M239 244h230M237 381h235" stroke="#FFFFFF" strokeOpacity="0.09" strokeWidth="10" strokeLinecap="round" />
             <rect x="259" y="391" width="50" height="48" rx="10" fill="#111C1A" />
             <rect x="421" y="391" width="50" height="48" rx="10" fill="#111C1A" />
@@ -175,8 +208,22 @@ function HeroIllustration({ shouldReduceMotion }) {
             <path d="M459 333h41" stroke="#DDF4D6" strokeOpacity="0.38" strokeWidth="5" strokeLinecap="round" />
           </g>
 
+          <g filter="url(#emberGlow)">
+            {[
+              { x: 184, y: 305, c: '#FF9A1F', d: 0 },
+              { x: 204, y: 294, c: '#FFC35A', d: 0.7 },
+              { x: 221, y: 319, c: '#B83A1B', d: 1.3 },
+              { x: 191, y: 336, c: '#FF7A24', d: 2.1 },
+              { x: 226, y: 287, c: '#D94A1B', d: 2.7 },
+              { x: 211, y: 330, c: '#FFB13B', d: 3.3 },
+              { x: 176, y: 323, c: '#B83A1B', d: 4.1 },
+            ].map((ember) => (
+              <motion.circle key={`${ember.x}-${ember.y}`} cx={ember.x} cy={ember.y} r="2.2" fill={ember.c} animate={shouldReduceMotion ? undefined : { y: [0, -22, -42], opacity: [0, 0.9, 0], scale: [0.6, 1, 0.35] }} transition={{ duration: 5.2, repeat: Infinity, ease: 'easeOut', delay: ember.d }} />
+            ))}
+          </g>
+
           {[0, 1, 2].map((item) => (
-            <motion.path key={item} d={`M${548 + item * 23} 87C${524 + item * 20} 50 ${584 + item * 8} 44 ${555 + item * 21} 12`} fill="none" stroke="#EFFFF0" strokeOpacity="0.58" strokeWidth="8" strokeLinecap="round" animate={steamMotion} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeOut', delay: item * 0.55 }} />
+            <motion.path key={item} d={`M${548 + item * 23} 87C${524 + item * 20} 50 ${584 + item * 8} 44 ${555 + item * 21} 12`} fill="none" stroke="url(#steamFade)" strokeOpacity="0.7" strokeWidth="9.5" strokeLinecap="round" animate={steamMotion} transition={{ duration: 4.4, repeat: Infinity, ease: 'easeOut', delay: item * 0.65 }} />
           ))}
         </svg>
       </div>
