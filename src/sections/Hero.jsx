@@ -78,9 +78,9 @@ function HeroIllustration({ shouldReduceMotion }) {
     : { pathLength: [0.05, 0.95, 0.05], opacity: [0.25, 1, 0.25] };
 
   const kpiBadges = [
-    { label: '24/7 Boiler Operation', className: 'right-2 top-12 md:right-0' },
-    { label: '100% Biomass Fuel Managed', className: 'left-0 top-40 md:-left-2' },
-    { label: '99.9% Steam Reliability', className: 'bottom-12 right-4 md:right-10' },
+    { label: '24/7 Boiler Operation', mobileLabel: ['24/7', 'Boiler'], className: 'right-3 top-8 md:right-0 md:top-12' },
+    { label: '100% Biomass Fuel Managed', mobileLabel: ['100%', 'Fuel'], className: 'left-3 top-[11rem] md:-left-2 md:top-40' },
+    { label: '99.9% Steam Reliability', mobileLabel: ['99.9%', 'Steam'], className: 'bottom-8 right-3 md:bottom-12 md:right-10' },
   ];
 
   return (
@@ -88,11 +88,11 @@ function HeroIllustration({ shouldReduceMotion }) {
       initial={shouldReduceMotion ? false : { opacity: 0, y: 34 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
-      className="relative min-h-[520px] lg:min-h-[660px]"
+      className="relative min-h-[420px] sm:min-h-[500px] lg:min-h-[660px]"
       aria-label="Bio Energy Partners professionally manages industrial biomass boilers"
     >
-      <div className="absolute inset-x-2 top-12 h-[500px] rounded-[3rem] bg-[radial-gradient(circle_at_50%_18%,rgba(109,190,69,0.22),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.08),rgba(7,17,15,0.22))] blur-sm md:inset-x-8" />
-      <div className="absolute inset-x-2 top-16 rounded-[2.5rem] border border-white/10 bg-[#0b1514]/80 p-3 shadow-[0_34px_110px_rgba(0,0,0,0.42)] backdrop-blur-2xl md:inset-x-8 md:p-6">
+      <div className="absolute inset-x-0 top-10 h-[390px] rounded-[2rem] bg-[radial-gradient(circle_at_50%_18%,rgba(109,190,69,0.22),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.08),rgba(7,17,15,0.22))] blur-sm sm:h-[470px] md:inset-x-8 md:top-12 md:h-[500px] md:rounded-[3rem]" />
+      <div className="absolute inset-x-0 top-14 rounded-[1.75rem] border border-white/10 bg-[#0b1514]/80 p-2 shadow-[0_34px_110px_rgba(0,0,0,0.42)] backdrop-blur-2xl sm:p-3 md:inset-x-8 md:top-16 md:rounded-[2.5rem] md:p-6">
         <svg className="h-auto w-full" viewBox="0 0 720 560" role="img" aria-labelledby="hero-boiler-title hero-boiler-desc">
           <title id="hero-boiler-title">Industrial biomass boiler management illustration</title>
           <desc id="hero-boiler-desc">A biomass conveyor feeds a large industrial boiler with gauges, controls, valves, steam, and green energy flow in front of a factory silhouette.</desc>
@@ -261,10 +261,15 @@ function HeroIllustration({ shouldReduceMotion }) {
           key={badge.label}
           animate={shouldReduceMotion ? undefined : { y: [0, index === 1 ? 10 : -10, 0] }}
           transition={{ duration: 5.8 + index * 0.7, repeat: Infinity, ease: 'easeInOut' }}
-          className={`absolute max-w-[210px] rounded-2xl border border-primary/25 bg-[#0b1514]/85 px-4 py-3 text-sm font-bold text-white shadow-[0_20px_70px_rgba(0,0,0,0.36)] backdrop-blur-xl ${badge.className}`}
+          className={`absolute max-w-[4.75rem] rounded-xl border border-primary/25 bg-[#0b1514]/85 px-2.5 py-2 text-[0.68rem] font-bold leading-tight text-white shadow-[0_20px_70px_rgba(0,0,0,0.36)] backdrop-blur-xl md:max-w-[210px] md:rounded-2xl md:px-4 md:py-3 md:text-sm md:leading-normal ${badge.className}`}
         >
-          <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(109,190,69,0.9)]" />
-          {badge.label}
+          <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_18px_rgba(109,190,69,0.9)] md:mr-2 md:h-2.5 md:w-2.5" />
+          <span className="hidden md:inline">{badge.label}</span>
+          <span className="inline-flex flex-col align-middle md:hidden">
+            {badge.mobileLabel.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </span>
         </motion.div>
       ))}
     </motion.div>
