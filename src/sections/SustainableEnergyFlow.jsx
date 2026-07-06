@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Activity, Factory, Flame, Gauge, HardHat, Leaf, PackageCheck, ShieldCheck, Settings, Trees } from 'lucide-react';
 import { Container } from '../components/Container';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { IndustrialBoilerIllustration } from '../components/illustrations/IndustrialBoilerIllustration';
 
 const flowStages = [
   {
@@ -85,28 +86,6 @@ function FloatingParticles({ reduceMotion }) {
   );
 }
 
-function BoilerIllustration({ reduceMotion }) {
-  return (
-    <div aria-hidden="true" className="relative mx-auto h-36 w-full max-w-[15rem] sm:h-40">
-      <div className="absolute left-1/2 top-0 flex -translate-x-1/2 gap-3">
-        {[0, 1, 2].map((item) => (
-          <motion.span
-            key={item}
-            className="h-12 w-3 rounded-full bg-gradient-to-t from-white/0 via-white/35 to-white/0 blur-[1px]"
-            animate={reduceMotion ? undefined : { y: [16, -10, 16], opacity: [0, 0.55, 0], scaleY: [0.7, 1.15, 0.7] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: item * 0.35 }}
-          />
-        ))}
-      </div>
-      <div className="absolute inset-x-5 bottom-6 h-24 rounded-[2rem] border border-primary/35 bg-gradient-to-br from-[#26352f] via-[#111d18] to-[#07110d] shadow-[inset_0_0_32px_rgba(255,255,255,0.08),0_0_70px_rgba(109,190,69,0.28)]" />
-      <div className="absolute bottom-9 left-1/2 h-14 w-14 -translate-x-1/2 rounded-full border-4 border-[#6dbe45]/50 bg-[#07110d] shadow-[inset_0_0_20px_rgba(109,190,69,0.25),0_0_30px_rgba(109,190,69,0.35)]" />
-      <div className="absolute bottom-12 left-8 h-9 w-6 rounded bg-[#1d2c25] shadow-[12rem_0_0_#1d2c25]" />
-      <div className="absolute bottom-3 left-8 right-8 h-4 rounded-full bg-[#0a1711]" />
-      <div className="absolute bottom-24 right-9 h-9 w-8 rounded-t-lg border border-primary/20 bg-[#1b2a23]" />
-    </div>
-  );
-}
-
 function EnergyLine({ reduceMotion }) {
   const animate = reduceMotion ? undefined : { x: ['-8%', '108%'] };
 
@@ -139,7 +118,7 @@ function FlowStage({ stage, index, reduceMotion }) {
       transition={{ duration: 0.55, ease: 'easeOut' }}
       className={`relative z-10 flex gap-5 rounded-[1.75rem] border backdrop-blur lg:flex-col lg:items-center lg:text-center ${
         stage.featured
-          ? 'border-primary/45 bg-[#101e17]/95 p-7 shadow-[0_34px_100px_rgba(109,190,69,0.22)] lg:-mt-10 lg:min-h-[27rem] lg:scale-110 lg:p-8'
+          ? 'border-primary/45 bg-[#101e17]/95 p-7 shadow-[0_34px_100px_rgba(109,190,69,0.22)] lg:-mt-14 lg:min-h-[31rem] lg:scale-110 lg:p-8'
           : 'border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.24)] lg:min-h-[18rem] lg:p-6'
       }`}
     >
@@ -149,7 +128,7 @@ function FlowStage({ stage, index, reduceMotion }) {
       <div className="min-w-0">
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary/90">{stage.label}</p>
         <h3 className={`mt-2 font-extrabold tracking-tight text-white ${stage.featured ? 'text-3xl' : 'text-xl'}`}>{stage.title}</h3>
-        {stage.featured && <BoilerIllustration reduceMotion={reduceMotion} />}
+        {stage.featured && <IndustrialBoilerIllustration className="mt-5 min-w-[18rem] scale-125 sm:min-w-[24rem] lg:-mx-12 lg:min-w-[34rem] lg:scale-100" />}
         <p className={`mt-3 leading-7 text-white/68 ${stage.featured ? 'text-base' : 'text-sm'}`}>{stage.description}</p>
       </div>
       {index < flowStages.length - 1 && <span aria-hidden="true" className="absolute -bottom-8 left-[31px] h-8 w-px bg-white/15 lg:-right-5 lg:left-auto lg:top-1/2 lg:h-px lg:w-5" />}
@@ -187,7 +166,7 @@ export function SustainableEnergyFlow() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.16 } } }}
-            className="grid gap-8 lg:grid-cols-[0.95fr_0.95fr_1.35fr_0.95fr_0.95fr] lg:items-center lg:gap-5"
+            className="grid gap-8 lg:grid-cols-[0.9fr_0.9fr_1.8fr_0.9fr_0.9fr] lg:items-center lg:gap-5"
           >
             {flowStages.map((stage, index) => (
               <FlowStage key={stage.title} stage={stage} index={index} reduceMotion={reduceMotion} />
