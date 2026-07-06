@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Flame, Gauge, Leaf, Waves } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Container } from '../components/Container';
 import { PrimaryButton } from '../components/PrimaryButton';
 
@@ -70,53 +70,128 @@ export function Hero() {
 }
 
 function HeroIllustration({ shouldReduceMotion }) {
+  const steamMotion = shouldReduceMotion
+    ? undefined
+    : { opacity: [0, 0.75, 0], y: [0, -32, -70], scale: [0.8, 1.08, 1.3] };
+  const flowMotion = shouldReduceMotion
+    ? undefined
+    : { pathLength: [0.05, 0.95, 0.05], opacity: [0.25, 1, 0.25] };
+
+  const kpiBadges = [
+    { label: '24/7 Boiler Operation', className: 'right-2 top-12 md:right-0' },
+    { label: '100% Biomass Fuel Managed', className: 'left-0 top-40 md:-left-2' },
+    { label: '99.9% Steam Reliability', className: 'bottom-12 right-4 md:right-10' },
+  ];
+
   return (
     <motion.div
       initial={shouldReduceMotion ? false : { opacity: 0, y: 34 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 0.15 }}
+      transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
       className="relative min-h-[520px] lg:min-h-[660px]"
-      aria-label="Industrial biomass boiler operation illustration"
+      aria-label="Bio Energy Partners professionally manages industrial biomass boilers"
     >
-      <motion.div animate={shouldReduceMotion ? undefined : { rotate: [0, 3, 0], y: [0, -10, 0] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }} className="absolute inset-x-8 top-10 h-[430px] rounded-[3rem] bg-[linear-gradient(145deg,rgba(109,190,69,0.22),rgba(255,255,255,0.05)_50%,rgba(9,18,17,0.2))] blur-sm" />
-      <div className="absolute inset-x-4 top-20 rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-2xl md:inset-x-10">
-        <div className="relative h-[430px] overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_35%_18%,rgba(109,190,69,0.28),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]">
-          <div className="absolute bottom-20 left-10 right-8 h-24 border-b-4 border-white/25">
-            <div className="absolute bottom-0 left-0 h-24 w-24 rounded-t-3xl bg-white/14" />
-            <div className="absolute bottom-0 left-28 h-36 w-28 rounded-t-[2rem] bg-white/12" />
-            <div className="absolute bottom-0 left-64 h-28 w-36 rounded-t-3xl bg-white/10" />
-            <div className="absolute bottom-24 left-36 h-28 w-5 rounded-full bg-white/18" />
-            <div className="absolute bottom-36 left-32 h-3 w-14 rounded-full bg-primary/70 blur-sm" />
-          </div>
+      <div className="absolute inset-x-2 top-12 h-[500px] rounded-[3rem] bg-[radial-gradient(circle_at_50%_18%,rgba(109,190,69,0.22),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.08),rgba(7,17,15,0.22))] blur-sm md:inset-x-8" />
+      <div className="absolute inset-x-2 top-16 rounded-[2.5rem] border border-white/10 bg-[#0b1514]/80 p-3 shadow-[0_34px_110px_rgba(0,0,0,0.42)] backdrop-blur-2xl md:inset-x-8 md:p-6">
+        <svg className="h-auto w-full" viewBox="0 0 720 560" role="img" aria-labelledby="hero-boiler-title hero-boiler-desc">
+          <title id="hero-boiler-title">Industrial biomass boiler management illustration</title>
+          <desc id="hero-boiler-desc">A biomass conveyor feeds a large industrial boiler with gauges, controls, valves, steam, and green energy flow in front of a factory silhouette.</desc>
+          <defs>
+            <linearGradient id="boilerShell" x1="170" x2="545" y1="215" y2="405" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#26332f" />
+              <stop offset="0.48" stopColor="#111c1a" />
+              <stop offset="1" stopColor="#30413b" />
+            </linearGradient>
+            <linearGradient id="greenFlow" x1="42" x2="595" y1="323" y2="221" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#6DBE45" stopOpacity="0" />
+              <stop offset="0.5" stopColor="#6DBE45" />
+              <stop offset="1" stopColor="#C7FF8F" stopOpacity="0" />
+            </linearGradient>
+            <radialGradient id="industrialGlow" cx="0" cy="0" r="1" gradientTransform="matrix(0 212 -344 0 365 292)" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#6DBE45" stopOpacity="0.24" />
+              <stop offset="1" stopColor="#6DBE45" stopOpacity="0" />
+            </radialGradient>
+            <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="7" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
 
-          <div className="absolute bottom-16 right-16 h-44 w-36 rounded-[2rem] border border-white/15 bg-[#17231f] shadow-2xl">
-            <div className="absolute inset-x-5 top-5 h-24 rounded-2xl bg-[linear-gradient(180deg,rgba(109,190,69,0.42),rgba(109,190,69,0.08))]" />
-            <div className="absolute -right-8 top-16 h-20 w-12 rounded-r-2xl border-y border-r border-white/15" />
-            <Gauge className="absolute left-7 top-10 text-white/75" size={34} />
-            <Flame className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary" size={44} />
-          </div>
+          <rect width="720" height="560" rx="34" fill="#081210" />
+          <rect width="720" height="560" rx="34" fill="url(#industrialGlow)" />
+          <path d="M49 432H680" stroke="#ECF8E8" strokeOpacity="0.16" strokeWidth="2" />
 
-          <motion.div animate={shouldReduceMotion ? undefined : { opacity: [0.45, 1, 0.45], scaleX: [0.92, 1, 0.92] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} className="absolute left-16 top-20 h-44 w-[70%] origin-left rounded-full border-t-2 border-primary/60" />
-          <motion.div animate={shouldReduceMotion ? undefined : { x: [0, 16, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }} className="absolute left-16 top-28 flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold text-primary">
-            <Waves size={16} /> Energy flow
-          </motion.div>
+          <g opacity="0.42">
+            <path d="M64 432V335h52v97M134 432V292h74v140M228 432V318h92v114M344 432V280h80v152M444 432V330h55v102M520 432V260h70v172" fill="#13201d" />
+            <path d="M145 292h41l-10-55h-21l-10 55ZM548 260h22l-7-72h-8l-7 72Z" fill="#182823" />
+            <path d="M80 356h20M151 315h39M246 342h55M360 304h47M535 286h39" stroke="#6DBE45" strokeOpacity="0.28" strokeWidth="4" strokeLinecap="round" />
+          </g>
 
-          <div className="absolute bottom-9 left-8 flex gap-2">
-            {Array.from({ length: 13 }).map((_, index) => (
-              <span key={index} className="h-4 w-7 rounded-full bg-[linear-gradient(135deg,#9b6b34,#d8ad65)] shadow-[0_8px_18px_rgba(0,0,0,0.22)]" />
+          <g>
+            <path d="M44 375l170-38 20 42-168 42-22-46Z" fill="#151f1d" stroke="#DDF4D6" strokeOpacity="0.18" strokeWidth="3" />
+            <path d="M70 375l132-29" stroke="#6DBE45" strokeOpacity="0.42" strokeWidth="6" strokeLinecap="round" />
+            {Array.from({ length: 8 }).map((_, index) => (
+              <motion.rect
+                key={index}
+                x={74 + index * 18}
+                y={365 - index * 4}
+                width="24"
+                height="12"
+                rx="4"
+                fill="#B48245"
+                animate={shouldReduceMotion ? undefined : { x: [74 + index * 18, 88 + index * 18, 74 + index * 18] }}
+                transition={{ duration: 3.4, repeat: Infinity, ease: 'linear', delay: index * 0.08 }}
+              />
             ))}
-          </div>
-        </div>
+          </g>
+
+          <g filter="url(#softGlow)">
+            <motion.path d="M92 345C170 315 221 323 276 285C334 245 402 242 461 260C512 276 548 252 607 218" fill="none" stroke="url(#greenFlow)" strokeWidth="7" strokeLinecap="round" animate={flowMotion} transition={{ duration: 3.1, repeat: Infinity, ease: 'easeInOut' }} />
+            <motion.path d="M118 388C206 356 282 376 348 337C418 296 488 302 606 268" fill="none" stroke="url(#greenFlow)" strokeWidth="5" strokeLinecap="round" animate={flowMotion} transition={{ duration: 3.7, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }} />
+          </g>
+
+          <g>
+            <rect x="198" y="218" width="330" height="188" rx="88" fill="url(#boilerShell)" stroke="#ECF8E8" strokeOpacity="0.18" strokeWidth="4" />
+            <ellipse cx="523" cy="312" rx="52" ry="90" fill="#182622" stroke="#ECF8E8" strokeOpacity="0.22" strokeWidth="4" />
+            <ellipse cx="202" cy="312" rx="38" ry="76" fill="#0D1715" stroke="#6DBE45" strokeOpacity="0.36" strokeWidth="4" />
+            <path d="M239 244h230M237 381h235" stroke="#FFFFFF" strokeOpacity="0.09" strokeWidth="10" strokeLinecap="round" />
+            <rect x="259" y="391" width="50" height="48" rx="10" fill="#111C1A" />
+            <rect x="421" y="391" width="50" height="48" rx="10" fill="#111C1A" />
+            <rect x="240" y="190" width="154" height="36" rx="14" fill="#14221F" stroke="#ECF8E8" strokeOpacity="0.14" strokeWidth="3" />
+            <path d="M390 204h121c34 0 62-28 62-62V96" fill="none" stroke="#263A34" strokeWidth="22" strokeLinecap="round" />
+            <path d="M390 204h121c34 0 62-28 62-62V96" fill="none" stroke="#FFFFFF" strokeOpacity="0.11" strokeWidth="6" strokeLinecap="round" />
+            <rect x="554" y="78" width="38" height="35" rx="8" fill="#2A3E37" stroke="#6DBE45" strokeOpacity="0.4" strokeWidth="3" />
+            <circle cx="573" cy="68" r="15" fill="#6DBE45" />
+            <path d="M560 68h26" stroke="#08200F" strokeWidth="5" strokeLinecap="round" />
+          </g>
+
+          <g>
+            <circle cx="320" cy="276" r="32" fill="#091210" stroke="#DFF5D8" strokeOpacity="0.8" strokeWidth="5" />
+            <path d="M303 282a18 18 0 0 1 35-6" fill="none" stroke="#6DBE45" strokeWidth="5" strokeLinecap="round" />
+            <motion.path d="M320 276l16-12" stroke="#F4FFF0" strokeWidth="4" strokeLinecap="round" animate={shouldReduceMotion ? undefined : { rotate: [-10, 18, -10] }} style={{ originX: '320px', originY: '276px' }} transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }} />
+            <rect x="446" y="258" width="66" height="88" rx="14" fill="#0A1312" stroke="#DDF4D6" strokeOpacity="0.18" strokeWidth="3" />
+            <rect x="457" y="270" width="44" height="22" rx="6" fill="#6DBE45" fillOpacity="0.78" />
+            <circle cx="464" cy="313" r="6" fill="#6DBE45" /><circle cx="482" cy="313" r="6" fill="#DDF4D6" opacity="0.72" /><circle cx="500" cy="313" r="6" fill="#6DBE45" opacity="0.55" />
+            <path d="M459 333h41" stroke="#DDF4D6" strokeOpacity="0.38" strokeWidth="5" strokeLinecap="round" />
+          </g>
+
+          {[0, 1, 2].map((item) => (
+            <motion.path key={item} d={`M${548 + item * 23} 87C${524 + item * 20} 50 ${584 + item * 8} 44 ${555 + item * 21} 12`} fill="none" stroke="#EFFFF0" strokeOpacity="0.58" strokeWidth="8" strokeLinecap="round" animate={steamMotion} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeOut', delay: item * 0.55 }} />
+          ))}
+        </svg>
       </div>
 
-      <motion.div animate={shouldReduceMotion ? undefined : { y: [0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} className="absolute right-0 top-14 rounded-3xl border border-white/10 bg-white/10 p-5 shadow-soft backdrop-blur-xl">
-        <Leaf className="mb-3 text-primary" />
-        <p className="text-sm font-bold">Biomass Fuel<br />Managed</p>
-      </motion.div>
-      <motion.div animate={shouldReduceMotion ? undefined : { y: [0, 12, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }} className="absolute bottom-16 left-0 rounded-3xl border border-white/10 bg-white/10 p-5 shadow-soft backdrop-blur-xl">
-        <p className="text-xs uppercase tracking-[0.2em] text-white/55">Operation</p>
-        <p className="mt-1 font-poppins text-2xl font-bold text-primary">24/7</p>
-      </motion.div>
+      {kpiBadges.map((badge, index) => (
+        <motion.div
+          key={badge.label}
+          animate={shouldReduceMotion ? undefined : { y: [0, index === 1 ? 10 : -10, 0] }}
+          transition={{ duration: 5.8 + index * 0.7, repeat: Infinity, ease: 'easeInOut' }}
+          className={`absolute max-w-[210px] rounded-2xl border border-primary/25 bg-[#0b1514]/85 px-4 py-3 text-sm font-bold text-white shadow-[0_20px_70px_rgba(0,0,0,0.36)] backdrop-blur-xl ${badge.className}`}
+        >
+          <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(109,190,69,0.9)]" />
+          {badge.label}
+        </motion.div>
+      ))}
     </motion.div>
   );
 }
