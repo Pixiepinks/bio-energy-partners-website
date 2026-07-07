@@ -118,8 +118,10 @@ function FlowStage({ stage, index, reduceMotion }) {
       transition={{ duration: 0.55, ease: 'easeOut' }}
       className={`relative z-10 flex w-full min-w-0 max-w-full gap-5 rounded-[1.75rem] border backdrop-blur lg:flex-col lg:items-center lg:text-center ${
         stage.featured
-          ? 'border-primary/45 bg-[#101e17]/95 p-7 shadow-[0_34px_100px_rgba(109,190,69,0.22)] lg:-mt-14 lg:min-h-[31rem] lg:scale-110 lg:p-8'
-          : 'border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.24)] lg:min-h-[18rem] lg:p-6'
+          ? 'border-primary/45 bg-[#101e17]/95 p-7 shadow-[0_34px_100px_rgba(109,190,69,0.22)] lg:-mt-14 lg:min-h-[31rem] lg:p-8 xl:px-10'
+          : `border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.24)] lg:min-h-[18rem] lg:p-5 xl:p-6 ${
+              index < 2 ? 'lg:-translate-x-3 xl:-translate-x-6 2xl:-translate-x-8' : 'lg:translate-x-3 xl:translate-x-6 2xl:translate-x-8'
+            }`
       }`}
     >
       <div className={`flex shrink-0 items-center justify-center rounded-2xl border ${stage.featured ? 'h-16 w-16 border-primary/45 bg-primary/18 text-primary' : 'h-12 w-12 border-white/10 bg-white/8 text-primary'}`}>
@@ -128,7 +130,7 @@ function FlowStage({ stage, index, reduceMotion }) {
       <div className="min-w-0 flex-1">
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary/90">{stage.label}</p>
         <h3 className={`mt-2 [overflow-wrap:anywhere] font-extrabold tracking-tight text-white ${stage.featured ? 'text-3xl' : 'text-xl'}`}>{stage.title}</h3>
-        {stage.featured && <IndustrialBoilerIllustration className="mt-5 max-w-full overflow-hidden lg:-mx-12 lg:min-w-[34rem] lg:overflow-visible" />}
+        {stage.featured && <IndustrialBoilerIllustration className="mt-5 max-w-full overflow-hidden lg:mx-auto lg:w-full lg:min-w-0 lg:overflow-visible" />}
         <p className={`mt-3 break-words leading-7 text-white/68 ${stage.featured ? 'text-base' : 'text-sm'}`}>{stage.description}</p>
       </div>
       {index < flowStages.length - 1 && <span aria-hidden="true" className="absolute -bottom-8 left-[31px] h-8 w-px bg-white/15 lg:-right-5 lg:left-auto lg:top-1/2 lg:h-px lg:w-5" />}
@@ -146,7 +148,7 @@ export function SustainableEnergyFlow() {
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
       <FloatingParticles reduceMotion={reduceMotion} />
 
-      <Container className="relative z-10 max-md:px-5">
+      <Container className="relative z-10 max-md:px-5 lg:max-w-none xl:px-12 2xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +168,7 @@ export function SustainableEnergyFlow() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.16 } } }}
-            className="grid w-full min-w-0 max-w-full grid-cols-1 gap-8 lg:grid-cols-[0.9fr_0.9fr_1.8fr_0.9fr_0.9fr] lg:items-center lg:gap-5"
+            className="grid w-full min-w-0 max-w-full grid-cols-1 gap-8 lg:grid-cols-[minmax(8rem,0.62fr)_minmax(8rem,0.62fr)_minmax(28rem,2.8fr)_minmax(8rem,0.62fr)_minmax(8rem,0.62fr)] lg:items-center lg:gap-4 xl:grid-cols-[minmax(8.5rem,0.62fr)_minmax(8.5rem,0.62fr)_minmax(34rem,2.8fr)_minmax(8.5rem,0.62fr)_minmax(8.5rem,0.62fr)] xl:gap-5"
           >
             {flowStages.map((stage, index) => (
               <FlowStage key={stage.title} stage={stage} index={index} reduceMotion={reduceMotion} />
