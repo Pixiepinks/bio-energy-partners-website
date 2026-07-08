@@ -180,9 +180,30 @@ export function Contact() {
       </MotionSection>
 
       <MotionSection id="location" className="bg-lightGray py-24 md:py-28">
-        <Container className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <motion.div variants={fadeUp}><p className="text-sm font-extrabold uppercase tracking-[0.3em] text-primary">Location</p><h2 className="mt-4 text-4xl font-extrabold tracking-tight md:text-5xl">Corporate Office</h2><div className="mt-7 rounded-[1.75rem] border border-dark/10 bg-white p-7 shadow-[0_22px_80px_rgba(12,35,24,0.08)]"><MapPin className="text-primary" size={32} /><p className="mt-5 text-lg font-bold leading-8 text-dark">#17-3, Echelon Square,<br />Colombo,<br />Sri Lanka</p><p className="mt-5 text-dark/65">Bio Energy Partners is positioned to support industrial facilities seeking dependable boiler operation and biomass energy management.</p></div></motion.div>
-          <motion.div variants={fadeUp} className="flex min-h-[380px] items-center justify-center rounded-[2rem] border border-dashed border-primary/45 bg-white p-8 text-center shadow-[0_28px_100px_rgba(12,35,24,0.1)]"><div><MapPin className="mx-auto text-primary" size={44} /><h3 className="mt-5 text-3xl font-extrabold text-dark">Google Map Location</h3><p className="mx-auto mt-3 max-w-md text-sm leading-7 text-dark/60">Google Maps embed placeholder. Replace this panel with the official office map iframe when available.</p></div></motion.div>
+        <Container className="flex justify-center">
+          <div className="w-full max-w-5xl">
+            <motion.div variants={fadeUp} className="text-center">
+              <p className="text-sm font-extrabold uppercase tracking-[0.3em] text-primary">Location</p>
+              <h2 className="mt-4 text-4xl font-extrabold tracking-tight md:text-5xl">Corporate Office</h2>
+            </motion.div>
+
+            <div className="mt-10 grid gap-10">
+              <motion.div
+                variants={fadeUp}
+                className="rounded-[2rem] border border-dark/10 bg-white p-8 shadow-[0_28px_100px_rgba(12,35,24,0.1)] md:p-10 lg:p-12"
+              >
+                <MapPin className="text-primary" size={36} />
+                <p className="mt-6 text-xl font-bold leading-9 text-dark md:text-2xl md:leading-10">
+                  #17-3, Echelon Square,<br />
+                  Colombo,<br />
+                  Sri Lanka
+                </p>
+                <p className="mt-6 max-w-3xl text-base leading-8 text-dark/65 md:text-lg">Bio Energy Partners is positioned to support industrial facilities seeking dependable boiler operation and biomass energy management.</p>
+              </motion.div>
+
+              {/* Future Google Maps embed can be added here as another full-width grid item. */}
+            </div>
+          </div>
         </Container>
       </MotionSection>
 
