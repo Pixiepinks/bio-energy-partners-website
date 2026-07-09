@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { navigationLinks } from '../data/navigation';
 import { useScrollPosition } from '../hooks/useScrollPosition';
 import { Container } from './Container';
+import { LogoRotator } from './LogoRotator';
 import { PrimaryButton } from './PrimaryButton';
 
 export function Navbar() {
@@ -22,10 +23,7 @@ export function Navbar() {
     <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${navBase}`}>
       <Container className="flex h-20 items-center justify-between lg:h-24">
         <NavLink to="/" className="group flex items-center gap-3" onClick={closeMenu} aria-label="Bio Energy Partners home">
-          <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-primary font-poppins text-lg font-bold text-white shadow-[0_18px_40px_rgba(109,190,69,0.3)] transition group-hover:scale-105">
-            <span className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.28),transparent_55%)]" />
-            <span className="relative">BEP</span>
-          </span>
+          <LogoRotator className="h-12 w-12 rounded-2xl shadow-[0_18px_40px_rgba(109,190,69,0.3)]" />
           <span className="font-poppins text-base font-bold leading-tight tracking-tight">Bio Energy<br />Partners</span>
         </NavLink>
 
